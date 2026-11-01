@@ -263,7 +263,7 @@ export default function Workspace() {
         id: page.id, title: page.title, content: page.content, category: page.category || "Personal",
         tags: normalizeTags(page.tags ?? []), isFavorite: Boolean(page.isFavorite), createdAt: page.createdAt ?? page.updatedAt, updatedAt: page.updatedAt,
       }));
-      await db.transaction("rw", db.pages, db.tasks, db.sessions, db.events, db.mistakes, db.habits, db.habitEntries, async () => {
+      await db.transaction("rw", [db.pages, db.tasks, db.sessions, db.events, db.mistakes, db.habits, db.habitEntries], async () => {
         await db.pages.bulkPut(normalizedPages); await db.tasks.bulkPut(result.data.tasks); await db.sessions.bulkPut(result.data.sessions);
         if (result.data.events?.length) await db.events.bulkPut(result.data.events);
         if (result.data.mistakes?.length) await db.mistakes.bulkPut(result.data.mistakes);

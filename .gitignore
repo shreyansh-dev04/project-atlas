@@ -19,3 +19,5 @@ pnpm-debug.log*
 *.backup
 *.bak
 *.tsbuildinfogit
+.open-next
+.wrangler
